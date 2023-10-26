@@ -1,6 +1,6 @@
+import { Delivery } from 'src/delivery/delivery.entity';
 import { Order_detail } from 'src/order_details/order_detail.entity';
 import { Payment } from 'src/payments/payment.entity';
-import { Store } from 'src/stores/store.entity';
 import { User } from 'src/users/user.entity';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToOne, Timestamp, OneToMany } from 'typeorm';
 
@@ -30,10 +30,11 @@ export class Order {
   @OneToMany((type) => Order_detail, (order_detail) => order_detail.order)
   order_detail: Order_detail[]
 
-  @ManyToOne((type) => Store, (store) => store.order)
-  store: Store
-
   @OneToOne((type) => Payment, (payment1) => payment1.order)
   @JoinColumn()
   payment1: Payment
+
+  @OneToOne((type) => Delivery, (delivery) => delivery.order)
+  @JoinColumn()
+  delivery: Delivery
 }
