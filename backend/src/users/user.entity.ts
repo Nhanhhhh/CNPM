@@ -1,6 +1,5 @@
 import { Order } from 'src/orders/order.entity';
-import { Store } from 'src/stores/store.entity';
-import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, OneToOne, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class User {
@@ -29,10 +28,7 @@ export class User {
   @Column({nullable: true, charset: 'utf8', collation: 'utf8_general_ci'})
   name: string;
 
-  @OneToOne((type) => Store, (store) => store.user)
-  @JoinColumn()
-  store: Store
 
   @OneToMany((type) => Order, (order) => order.user)
-  order: Order[]
+  public order: Order[]
 }

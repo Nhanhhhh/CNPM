@@ -8,9 +8,6 @@ export class Order_detail {
   id: number;
 
   @Column()
-  image: string;
-
-  @Column()
   quantity: number;
 
   @Column()

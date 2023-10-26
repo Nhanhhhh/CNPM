@@ -12,8 +12,8 @@ import { OrderDetailsService } from './order_details/order_details.service';
 import { OrderDetailsController } from './order_details/order_details.controller';
 import { OrderDetailsModule } from './order_details/order_details.module';
 import { PaymentsModule } from './payments/payments.module';
-import { StoresService } from './stores/stores.service';
-import { StoresModule } from './stores/stores.module';
+import { DeliveryModule } from './delivery/delivery.module';
+
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -25,8 +25,8 @@ import { StoresModule } from './stores/stores.module';
     database: 'cnpm',
     entities: [__dirname + '/**/*.entity{.ts,.js}'],
     synchronize: true,
-  }), ProductsModule, OrdersModule, OrderDetailsModule, PaymentsModule, StoresModule,],
-  controllers: [AppController, UsersController, ProductsController, OrderDetailsController],
-  providers: [AppService, ProductsService, OrderDetailsService, StoresService],
+  }), ProductsModule, OrdersModule, OrderDetailsModule, PaymentsModule, UsersModule, DeliveryModule],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

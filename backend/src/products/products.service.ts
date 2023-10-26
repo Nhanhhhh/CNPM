@@ -1,4 +1,38 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
+import { Product } from './product.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 
 @Injectable()
-export class ProductsService {}
+export class ProductsService {
+    constructor(
+        @InjectRepository(Product)
+        private readonly productRepo: Repository<Product>,
+    ) {}
+
+    async findAll(): Promise<Product[]> {
+        return await this.productRepo.find();
+    }
+
+    async updateProduct(product: Product): Promise<UpdateResult> {
+        return await this.productRepo.update(product.id, product);
+    }
+
+    async deleteProduct(id): Promise<DeleteResult> {
+        return await this.productRepo.delete(id);
+    }
+
+    async getProductById(productId): Promise<Product> {
+        return this.productRepo.findOneBy({id: productId});
+    }
+
+    async createProduct(product: Product): Promise<Product> {
+        const findProductByName = await this.productRepo.findOneBy({name: product.name});
+
+        if(findProductByName != null) {
+            throw new BadRequestException("This product already exists.");
+        }
+
+        return await this.productRepo.save(product);
+    }
+}
