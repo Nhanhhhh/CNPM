@@ -9,6 +9,8 @@ $(document).ready(function () {
 	});
 });
 
+
+
 let Name = document.querySelector(".name");
 let Username = document.querySelector(".username");
 let Password = document.querySelector(".password");
@@ -19,17 +21,19 @@ let signUpButton = document.getElementById("signup");
 signUpButton.addEventListener("click", ()=>{
 	let obj={
 		name:Name.value,
-		username:Username.value,
+		userName:Username.value,
 		password:Password.value,
 		phone:Phone.value,
 		email:Email.value
 	};
 
-	fetch("/signup", {
+	fetch("http://localhost:3000/users/", {
 		method: "POST",
 		headers: {
 			"Content-type":"application/json"
 		},
 		body:JSON.stringify(obj)
+
 	});
+
 });

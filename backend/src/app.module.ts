@@ -13,6 +13,7 @@ import { OrderDetailsController } from './order_details/order_details.controller
 import { OrderDetailsModule } from './order_details/order_details.module';
 import { PaymentsModule } from './payments/payments.module';
 import { DeliveryModule } from './delivery/delivery.module';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -25,7 +26,7 @@ import { DeliveryModule } from './delivery/delivery.module';
     database: 'cnpm',
     entities: [__dirname + '/**/*.entity{.ts,.js}'],
     synchronize: true,
-  }), ProductsModule, OrdersModule, OrderDetailsModule, PaymentsModule, UsersModule, DeliveryModule],
+  }), ProductsModule, OrdersModule, OrderDetailsModule, PaymentsModule, UsersModule, DeliveryModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })

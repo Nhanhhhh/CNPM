@@ -7,13 +7,18 @@ export class UsersController {
     constructor(private userService: UsersService){}
     
     @Post()
-    createUser(@Body() user: User): Promise<User> {
+    createUser(@Body()user: User): Promise<User> {
         return this.userService.createUser(user);
     }
 
     @Get()
     getAll(): Promise<User[]> {
         return this.userService.findAll();
+    }
+
+    @Get('/withOrders/:id')
+    getUserWithOrders(@Param('id') id: number) {
+        return this.userService.findOrdersInUser(id);
     }
 
     @Get(':id') 
@@ -45,4 +50,6 @@ export class UsersController {
     // getSeller(): Promise<User[]> {
     //     return this.userService.getSeller();
     // }
+
+
 }

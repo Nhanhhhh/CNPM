@@ -12,16 +12,13 @@ export class Order {
   @Column('float')
   total: number;
 
-  @Column()
-  payment: string;
-
   @Column({nullable: true, charset: 'utf8', collation: 'utf8_general_ci' })
   note: string;
 
   @Column('float', {nullable: true })
   discount: number;
 
-  @Column({nullable: true})
+  @Column({nullable: true, default: () => 'CURRENT_TIMESTAMP'})
   create_at: Date;
 
   @ManyToOne((type) => User, (user) => user.order)
@@ -30,9 +27,9 @@ export class Order {
   @OneToMany((type) => Order_detail, (order_detail) => order_detail.order)
   order_detail: Order_detail[]
 
-  @OneToOne((type) => Payment, (payment1) => payment1.order)
+  @OneToOne((type) => Payment, (payment) => payment.order)
   @JoinColumn()
-  payment1: Payment
+  payment: Payment
 
   @OneToOne((type) => Delivery, (delivery) => delivery.order)
   @JoinColumn()
