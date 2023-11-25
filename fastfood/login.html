@@ -7,57 +7,69 @@
 
     <link rel="stylesheet" type="text/css" href="style/style.css">
     <link rel="stylesheet" type="text/css" href="style/loginStyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+
 </head>
 
 <body>
     <div class="tabBar">
-        <button class="tabButton" onclick="openTab('home')"><a href="home.html">Home</a></button>
-        <button class="tabButton" onclick="openTab('menu')"><a href="menu.html">Menu</a></button>
-        <button class="tabButton" onclick="openTab('aboutUs')"><a href="aboutUs.html">About Us</a></button>
-        <button class="tabButton" onclick="openTab('login')"><a href="login.html">Log in</a></button>
+        <button class="tabButton" onclick="openTab('home')"><a href="home.html">Trang chủ</a></button>
+        <button class="tabButton" onclick="openTab('menu')"><a href="menu.html">Thực đơn</a></button>
+        <button class="tabButton" onclick="openTab('payment')"><a href="payment.html">Thanh toán</a></button>
+        <button class="tabButton" onclick="openTab('about')"><a href="about.html">About</a></button>
+        <button class="tabButton" onclick="openTab('login')"><a href="login.html">Đăng nhập</a></button>
     </div>
     
 
 
     <div class="wrapper">
         <div class="container sign-up-container">
-            <form action="#" id="dataForm">
+            <form action="#" class="dataForm">
                 <h1>Đăng ký</h1>
                 <div class="social-container">
-                    <a class="link" href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                    <a class="link" href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                    <a class="link" href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="link" href="#" class="social"><ion-icon name="logo-facebook"></ion-icon></a>
+                    <a class="link" href="#" class="social"><ion-icon name="logo-google"></ion-icon></a>
+                    <a class="link" href="#" class="social"><ion-icon name="logo-apple"></ion-icon></a>
                 </div>
                 <span>hoặc sử dụng email để đăng ký</span>
-                <input type="text" class="name" placeholder="Tên của bạn" />
-                <input type="text" class="username" placeholder="Tên đằng nhập" />
-                <input type="password" class="password" placeholder="Mật khẩu" />
-                <input type="text" class="phone" placeholder="Điện thoại" />
-                <input type="email" class="email" placeholder="Email" />
+                <input type="text" class="nameSignup" placeholder="Tên của bạn" />
+                <input type="text" class="usernameSignup" placeholder="Tên đằng nhập" />
+                <input type="password" class="passwordSignup" placeholder="Mật khẩu" />
+                <input type="tel" class="phoneSignup" placeholder="Điện thoại" />
+                <input type="email" class="emailSignup" placeholder="Email" />
+                <input type="text" class="addressSignup" placeholder="Địa chỉ" />
+                <div class="usernameExisted"></div>
                 <button type="submit" class="signup-login-button" id="signup">Tạo tài khoản</button>
                 <span>Đã có tài khoản? <a class="toLogIn" href="#">Đăng nhập</a></span>
             </form>
         </div>
         <div class="container log-in-container">
-            <form action="#" id="dataForm">
+            <form action="#" class="dataForm">
                 <h1>Đăng nhập</h1>
                 <div class="social-container">
-                    <a class="link" href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                    <a class="link" href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                    <a class="link" href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="link" href="#" class="social"><ion-icon name="logo-facebook"></ion-icon></a>
+                    <a class="link" href="#" class="social"><ion-icon name="logo-google"></ion-icon></a>
+                    <a class="link" href="#" class="social"><ion-icon name="logo-apple"></ion-icon></a>
                 </div>
                 <span>hoặc sử dụng email</span>
-                <input type="email" class="username" placeholder="Tên đăng nhập" />
-                <input type="password" class="password" placeholder="Mật khẩu" />
+                <input type="text" class="usernameLogin" placeholder="Tên đăng nhập" />
+                <input type="password" class="passwordLogin" placeholder="Mật khẩu" />
+                <div class="wrongLoginInfo"></div>
                 <a class="forgetPasswd" href="#">Quên mật khẩu?</a>
                 <button type="submit" class="signup-login-button" id="login">Đăng nhập</button>
                 <span>Chưa có tài khoản? <a class="toSignUp" href="#">Tạo tài khoản</a></span>
             </form>
         </div>
     </div>
+
+    <div data-include="footer"></div>
             
 
+    <!-- <script src=”https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js”></script> -->
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="script/script.js"></script>
     <script src="script/scriptLogin.js"></script>
 </body>

@@ -31,6 +31,25 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
+    let catContainer = $('.food-category');
+    
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:3000/products/getAll',
+        success: function(menu) {
+            $.each(menu, function(i, food) {
+                let catTemplate = $('#category-template').contents().clone();
+                catTemplate.find('.cat-img').attr('src', food.image);
+                catTemplate.find('.item > p').text(food.name);
+                catTemplate.find('.price > p').text(food.price + '₫');
+                catTemplate.find('.description > p').text(food.description);
+                catContainer.append(catTemplate);
+            });
+        },
+        error: function() {
+            alert("Đã xảy ra lỗi. Không thể tải thực đơn.");
+        }
+    });
     function addCategory(itemName, price, description, srcImage) {
         let categoryContainer = $("<div>").addClass("category-container");
 

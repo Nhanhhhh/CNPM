@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+    <link rel="stylesheet" type="text/css" href="style/adminStyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" type="text/css" href="style/jquery-editable-select.min.css">
+    
+</head>
+<body>
+    <div class="tabBar">
+        <button class="tabButton" onclick="openTab('home')"><a href="home.html">Trang chủ</a></button>
+        <button class="tabButton" onclick="openTab('menu')"><a href="menu.html">Thực đơn</a></button>
+        <button class="tabButton" onclick="openTab('payment')"><a href="payment.html">Thanh toán</a></button>
+        <button class="tabButton" onclick="openTab('about')"><a href="about.html">About</a></button>
+        <button class="tabButton" onclick="openTab('login')"><a href="login.html">Admin</a></button>
+    </div>
+
+    <div class="container">
+        <div class="leftNavigationBar">
+            <button class="navButton manageOrderButton">Quản lý đơn hàng</button>
+            <button class="navButton changeMenuButton">Thay đổi thực đơn</button>
+        </div>
+
+        <div class="content">
+
+          <div class="manageOrder">
+            <p>ĐƠN HÀNG ĐANG XỬ LÝ</p>
+            <table>
+                <thead>
+                  <th style="width: 15%;">Khách hàng</th>
+                  <th style="width: 10%;">Thời gian tiếp nhận đơn hàng</th>
+                  <th style="width: 10%;">Thời gian hoàn thành đơn hàng</th>
+                  <th style="width: 20%;">Món khách đặt</th>
+                  <th style="width: 20%;">Địa chỉ nhận hàng</th>
+                  <th style="width: 15%;">Tổng giá trị đơn hàng</th>
+                  <th style="width: 10%;">Đánh dấu là đã hoàn thành</th>
+                </thead>
+                <tr>
+                  <td>qwe</td>
+                  <td>asd</td>
+                  <td>zxc</td>
+                  <td>10</td>
+                  <td>10</td>
+                  <td>10</td>
+                  <td><button class="finishButton">HOÀN THÀNH</button></td>
+                </tr>
+                <tr>
+                  <td>16</td>
+                  <td>14</td>
+                  <td>10</td>
+                </tr>
+                <tr>
+                  <td>as</td>
+                </tr>
+                <tr>
+                  <td>as</td>
+                </tr>
+            </table>
+          </div>
+
+          <div class="changeMenu">
+            <div class="sameRow">
+              <p>THỰC ĐƠN</p>
+              <button class="addFood">THÊM MÓN</button>
+            </div>
+            <table>
+              <thead>
+                <th style="width: 2%;">Mã món ăn</th>
+                <th style="width: 10%;">Thời gian thêm vào thực đơn</th>
+                <th style="width: 10%;">Lần chỉnh sửa gần nhất</th>
+                <th style="width: 15%;">Ảnh minh họa</th>
+                <th style="width: 15%;">Tên món ăn</th>
+                <th style="width: 10%;">Loại món ăn</th>
+                <th style="width: 20%;">Mô tả</th>
+                <th style="width: 12%;">Giá bán</th>
+                <th style="width: 3%;">Thay đổi</th>
+                <th style="width: 3%;">Xóa</th>
+              </thead>
+
+              <tbody id="menuBody"></tbody>
+              
+          </table>
+          </div>
+
+        </div>
+        
+        
+
+    </div>
+    
+    <div data-include="footer"></div>
+
+    <!-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script> -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="script/jquery-editable-select.min.js"></script>
+    <script type="text/javascript" src="script/script.js"></script>
+    <script type="text/javascript" src="script/scriptadmin.js"></script>
+
+
+
+</body>
+</html>
