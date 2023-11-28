@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment</title>
+
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+    <link rel="stylesheet" type="text/css" href="style/paymentStyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+
+</head>
+<body>
+    <div class="tabBar">
+        <button class="tabButton" onclick="openTab('home')"><a href="home.html">Trang chủ</a></button>
+        <button class="tabButton" onclick="openTab('menu')"><a href="menu.html">Thực đơn</a></button>
+        <button class="tabButton" onclick="openTab('payment')"><a href="payment.html">Thanh toán</a></button>
+        <button class="tabButton" onclick="openTab('about')"><a href="about.html">About</a></button>
+        <button class="tabButton" onclick="openTab('login')"><a href="login.html">Đăng nhập</a></button>
+    </div>
+
+    <div class="container">
+        <div class="ordered"></div>
+        <div class="pay">
+            <div class="paymentHeader">Đơn hàng</div>
+
+            <div>
+                <p id="paymentOptions">Lựa chọn phương thức thanh toán:</p> 
+                <input type="radio" id="card">
+                <label for="card">Thanh toán bằng thẻ tín dụng</label>
+                <br>
+                <input type="radio" id="onArrival" checked="true">
+                <label for="onArrival">Thanh toán khi nhận hàng</label>
+            </div>
+
+            <div class="payByCard">
+                <div class="logos">
+                    <div class="logoFrame"><img class="logoImg" src="images/payment_logos/visa.png"></div>
+                    <div class="logoFrame"><img class="logoImg" src="images/payment_logos/mastercard.png"></div>
+                    <div class="logoFrame"><img class="logoImg" src="images/payment_logos/paypal.webp"></div>
+                    <div class="logoFrame"><img class="logoImg" src="images/payment_logos/napas.jpg"></div>
+                </div>
+
+                <div class="cardInfo">
+                    <input type="text" class="inputCard name" placeholder="Họ và tên" />
+                    <input type="text" class="inputCard cardNumber" placeholder="Số thẻ" />
+                    <input type="text" class="inputCard Expiration" placeholder="Ngày hết hạn thẻ (mm/yy)" />
+                    <input type="text" class="inputCard securityCode" placeholder="Mã bảo vệ" />
+                </div>
+            </div>
+
+            <hr>
+            <div class="voice">
+                <table>
+                    <thead class="tableHeader"></thead>
+                    <tr>
+                        <td class="tableCol1">Tổng giá trị đơn hàng</td>
+                        <td class="tableCol2 total">0đ</td>
+                    </tr>
+                    <tr>
+                        <td class="tableCol1">Khuyến mãi</td>
+                        <td class="tableCol2 discount">0đ</td>
+                    </tr>
+                    <tr>
+                        <td class="tableCol1">Tổng cộng</td>
+                        <td class="tableCol2 overall">1.999.999đ</td>
+                    </tr>
+                </table>
+            </div>
+
+            <hr>
+            <div class="purchase">
+                <button type="submit" class="purchaseButton" id="signup">Đặt hàng</button>
+            </div>
+        </div>
+    </div>
+
+    <div data-include="footer"></div>
+
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="script/script.js"></script>
+    <script type="text/javascript" src="script/scriptPayment.js"></script>
+
+</body>
+</html>

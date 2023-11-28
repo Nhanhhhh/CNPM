@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@400;500&display=swap');
+
+.ordered {
+    flex-grow: 1; 
+    height: 500px;
+    /* background-color: red;  */
+    border: 1px solid black;
+    display: flex;
+}
+
+.pay {
+    padding: 40px;
+    width: 400px;
+    height: fit-content;
+    /* background-color: #007bff;  */
+    /* border: 1px solid black; */
+    border-radius: 10px;
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+			0 10px 10px rgba(0,0,0,0.22);
+    margin-top: 100px;
+    margin-right: 25px;
+    position: sticky;
+    top: 100px;
+    /* font-family: 'Montserrat', sans-serif; */
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    align-items: center;
+}
+
+.paymentHeader {
+	font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 35px;
+}
+
+.container {
+    display: flex;
+    /* height: 800vh; */
+    position: relative;
+}
+
+#paymentOptions {
+    font-style: italic;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+input {
+    margin: 8px auto;
+}
+
+.onArrival {
+    margin-bottom: 20px;
+}
+
+.payByCard {
+    margin-top: 10px;
+    /* border: 1px solid black; */
+    display: none;
+}
+
+.logos {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.logoFrame {
+    width: 70px;
+    height: 50px;
+    /* border: 1px solid black; */
+    display: flex;
+    align-items: center;
+    opacity: 0.25;
+    cursor: pointer;
+}
+
+.logos img {
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+    /* border: 1px solid black; */
+}
+
+.cardInfo {
+    display: flex;
+    flex-direction: column;
+    /* max-width: 90%; */
+}
+
+.cardInfo input {
+	background-color: #eee;
+	border: none;
+	padding: 12px;
+	margin: 8px 0;
+	width: 100%;
+    box-sizing: border-box;
+}
+
+table {
+    width: 100%;
+    margin: 20px auto;
+    line-height: 30px;
+}
+
+.tableHeader {
+    display: none;
+}
+
+.tableCol2 {
+    text-align: right;
+}
+
+.overall {
+    font-size: 30px;
+    color: red;
+    font-weight: 600;
+}
+
+.purchase {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 60px;
+    position: relative;
+}
+
+.purchaseButton {
+    margin: 20px auto;
+    position: absolute;
+    border-radius: 25px;
+	border: 1px solid #FF4B2B;
+	background-color: #FF4B2B;
+	color: #FFFFFF;
+	font-size: 15px;
+	font-weight: bold;
+	margin-top: 25px;
+	padding: 15px 45px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+    /* right: 40px; */
+}
+
+.purchaseButton:active {
+	transform: scale(0.95);
+}
+
+.purchaseButton:hover {
+    cursor: pointer;
+}
+
+.purchaseButton:focus {
+	outline: none;
+}
+
+.purchaseButton.ghost {
+	background-color: transparent;
+	border-color: #FFFFFF;
+}

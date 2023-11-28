@@ -6,17 +6,17 @@ import { Product } from './product.entity';
 export class ProductsController {
     constructor(private productService: ProductsService){}
 
-    @Get()
+    @Get('getAll')
     getAll(): Promise<Product[]> {
         return this.productService.findAll();
     }
 
-    @Get(':id') 
-    getProductById(@Param() params) {
-        return this.productService.getProductById(params.id);
+    @Get('types')
+    getUniqueProductTypes(): Promise<string[]> {
+        return this.productService.getUniqueProductTypes();
     }
-
-    @Put()
+    
+    @Put('update')
     updateProduct(@Body() product: Product) {
         return this.productService.updateProduct(product);
     }
@@ -29,5 +29,10 @@ export class ProductsController {
     @Post()
     createProduct(@Body() product: Product): Promise<Product> {
         return this.productService.createProduct(product);
+    }
+
+    @Get('get:id') 
+    getProductById(@Param() params) {
+        return this.productService.getProductById(params.id);
     }
 }

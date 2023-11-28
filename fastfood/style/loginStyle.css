@@ -10,7 +10,8 @@
 }
 
 body {
-	background-image: url("/images/doodle\ background.jpg");
+	background-image: url("/fastfood/images/tile_background.png");
+	background-size: contain;
 }
 
 h1 {
@@ -18,13 +19,17 @@ h1 {
 	margin: 0;
 }
 
-p {
+/* p {
 	font-size: 14px;
 	font-weight: 100;
 	line-height: 20px;
 	letter-spacing: 0.5px;
 	margin: 20px 0 30px;
-}
+} */
+
+ion-icon {
+	font-size: 17px;
+  }
 
 span {
 	font-size: 12px;
@@ -102,13 +107,13 @@ input {
 
 .log-in-container {
 	left: 0;
-	width: 450px;
+	width: 420px;
 	z-index: 2;
 }
 
 .sign-up-container {
 	left: 0;
-	width: 450px;
+	width: 420px;
 	z-index: 1;
 	display: none;
 }
@@ -131,6 +136,7 @@ input {
 
 .social-container a {
 	border: 1px solid #DDDDDD;
+	/* border: none; */
 	border-radius: 50%;
 	display: inline-flex;
 	justify-content: center;
@@ -140,27 +146,9 @@ input {
 	width: 40px;
 }
 
-/* footer {
-    background-color: #222;
-    color: #fff;
-    font-size: 14px;
-    bottom: 0;
-    position: fixed;
-    left: 0;
-    right: 0;
-    text-align: center;
-    z-index: 999;
+.wrongLoginInfo, .usernameExisted p {
+	/* margin-bottom: 0; */
+	color: #e32929;
+	font-size: 12px;
+	font-weight: bold;
 }
-
-footer p {
-    margin: 10px 0;
-}
-
-footer i {
-    color: red;
-}
-
-footer a {
-    color: #3c97bf;
-    text-decoration: none;
-} */
