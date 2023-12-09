@@ -9,8 +9,8 @@ export class Product {
   @Column()
   image: string;
 
-  @Column('float')
-  price: number;
+  // @Column('float')
+  // price: number;
 
   @Column()
   type: string;

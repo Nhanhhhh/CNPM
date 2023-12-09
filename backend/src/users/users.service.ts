@@ -21,13 +21,26 @@ export class UsersService {
         if(user.userName == "admin") {
             user.role = 0;
         }
+        if(user.role == null) {
+            user.role = 1;
+        }
 
         const hashPassword = await hash(user.password, 10);
         user.password = hashPassword;
-        user.role = 1;
         return await this.userRepo.save(user);
     }
 
+    async findOrdersInUser(userId: number): Promise<User> {
+        const res = await this.userRepo.createQueryBuilder("user")
+            .leftJoin("user.order", "order")
+            .select(["user", "order"])
+            .where("user.id=:id", {id: userId})
+            .getOne();
+
+        console.log(res, userId);
+        return res;
+    }
+    
     async findByUserName(username): Promise<User> {
         return this.userRepo.findOneBy({userName: username})
     }

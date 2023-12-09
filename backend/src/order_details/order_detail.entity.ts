@@ -11,7 +11,7 @@ export class Order_detail {
   quantity: number;
 
   @Column()
-  price: string;
+  price: number;
 
   @OneToOne((type) => Product, (product) => product.order_detail)
   @JoinColumn()

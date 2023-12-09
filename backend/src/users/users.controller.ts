@@ -16,6 +16,11 @@ export class UsersController {
         return this.userService.findAll();
     }
 
+    @Get('/withOrders/:id')
+    getUserWithOrders(@Param('id') id: number) {
+        return this.userService.findOrdersInUser(id);
+    }
+
     @Get(':id') 
     getUserById(@Param() params) {
         return this.userService.findByUserId(params.id);
