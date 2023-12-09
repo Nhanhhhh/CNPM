@@ -31,8 +31,13 @@ export class ProductsController {
         return this.productService.createProduct(product);
     }
 
-    @Get('get:id') 
+    @Get('get/:id') 
     getProductById(@Param() params) {
         return this.productService.getProductById(params.id);
+    }
+
+    @Get('getByName/:name') 
+    getProductByName(@Param() params) {
+        return this.productService.getProductByName(params.name);
     }
 }

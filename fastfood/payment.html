@@ -14,22 +14,49 @@
         <button class="tabButton" onclick="openTab('home')"><a href="home.html">Trang chủ</a></button>
         <button class="tabButton" onclick="openTab('menu')"><a href="menu.html">Thực đơn</a></button>
         <button class="tabButton" onclick="openTab('payment')"><a href="payment.html">Thanh toán</a></button>
-        <button class="tabButton" onclick="openTab('about')"><a href="about.html">About</a></button>
+        <button class="tabButton" onclick="openTab('about')"><a href="about.html">Kiểm tra đơn hàng</a></button>
         <button class="tabButton" onclick="openTab('login')"><a href="login.html">Đăng nhập</a></button>
     </div>
 
     <div class="container">
-        <div class="ordered"></div>
+        <div class="ordered">
+            <template id="category-template">
+                <div class="category-container">
+                    <div class="category-img">
+                        <img class="cat-img" src="">
+                    </div>
+        
+                    <div class="item-and-price">
+                        <div class="item">
+                            <p></p>
+                        </div>
+                        <div class="price">
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <p></p>
+                    </div>
+        
+                    <div class="number">
+                        <!-- <button class="minus">-</button>
+                        <input class="countVal" type="text" value="0">
+                        <button class="plus">+</button> -->
+                        <p></p>
+                    </div>
+                </div>
+            </template>
+        </div>
         <div class="pay">
             <div class="paymentHeader">Đơn hàng</div>
 
             <div>
                 <p id="paymentOptions">Lựa chọn phương thức thanh toán:</p> 
-                <input type="radio" id="card">
-                <label for="card">Thanh toán bằng thẻ tín dụng</label>
-                <br>
                 <input type="radio" id="onArrival" checked="true">
                 <label for="onArrival">Thanh toán khi nhận hàng</label>
+                <br>
+                <input type="radio" id="card">
+                <label for="card">Thanh toán bằng thẻ tín dụng</label>
             </div>
 
             <div class="payByCard">
@@ -47,9 +74,22 @@
                     <input type="text" class="inputCard securityCode" placeholder="Mã bảo vệ" />
                 </div>
             </div>
+            
+            <div>
+                <p id="deliveryOptions">Lựa chọn phương thức vận chuyển:</p> 
+                <input type="radio" id="atRestaurant" checked="true">
+                <label for="atRestaurant">Nhận hàng tại cửa hàng</label>
+                <br>
+                <input type="radio" id="toAddress">
+                <label for="toAddress">Giao hàng đến địa chỉ</label>
 
+                <input type="text" class="rcvAddress" placeholder="Nhập địa chỉ nhận hàng tại đây" />
+            </div>
+
+            <p id="note">Ghi chú:</p>
+            <input type="text" class="noteInput" placeholder="Ghi chú cho đơn hàng" />
             <hr>
-            <div class="voice">
+            <div class="invoice">
                 <table>
                     <thead class="tableHeader"></thead>
                     <tr>
@@ -58,18 +98,22 @@
                     </tr>
                     <tr>
                         <td class="tableCol1">Khuyến mãi</td>
-                        <td class="tableCol2 discount">0đ</td>
+                        <td class="tableCol2 discount">0₫</td>
+                    </tr>
+                    <tr>
+                        <td class="tableCol1">Phí vận chuyển</td>
+                        <td class="tableCol2 delivery">0đ</td>
                     </tr>
                     <tr>
                         <td class="tableCol1">Tổng cộng</td>
-                        <td class="tableCol2 overall">1.999.999đ</td>
+                        <td class="tableCol2 overall"></td>
                     </tr>
                 </table>
             </div>
 
             <hr>
             <div class="purchase">
-                <button type="submit" class="purchaseButton" id="signup">Đặt hàng</button>
+                <button type="submit" class="purchaseButton">Đặt hàng</button>
             </div>
         </div>
     </div>

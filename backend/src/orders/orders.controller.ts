@@ -25,7 +25,7 @@ export class OrdersController {
             total += (i.price * i.quantity);
             this.ordersDetailService.createOrderDetail(i);
         })
-        var finalMoney = total * body.discount;
+        var finalMoney = total * (1 - body.discount);
         var deliveryPrice = 25000;
         if(finalMoney >= 100000) deliveryPrice = 0;
         //finalMoney += deliveryPrice;
@@ -33,11 +33,7 @@ export class OrdersController {
         var delivery: any = {
             method: "Giao hàng nhanh",
             price: deliveryPrice,
-        }
-
-        var payment: any = {
-            name: "Thanh toán khi nhận hàng",
-            status: "Chưa thanh toán",
+            address: body.address,
         }
 
         var newOrder: any = {
@@ -47,11 +43,11 @@ export class OrdersController {
             user: body.user,
             order_detail: order_detail,
             delivery: delivery,
-            payment: payment,
+            payment: body.payment,
         }   
         
         console.log(newOrder);
-        this.PaymentsService.createPayment(payment);
+        this.PaymentsService.createPayment(body.payment);
         this.DeliveryService.createDelivery(delivery);
         return this.OrdersService.createOrder(newOrder);
     }

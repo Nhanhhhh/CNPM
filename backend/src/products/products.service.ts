@@ -29,7 +29,11 @@ export class ProductsService {
     async getProductById(productId): Promise<Product> {
         return this.productRepo.findOneBy({id: productId});
     }
-
+    
+    async getProductByName(productName): Promise<Product> {
+        return this.productRepo.findOneBy({name: productName});
+    }
+    
     async createProduct(product: Product): Promise<Product> {
         const findProductByName = await this.productRepo.findOneBy({name: product.name});
 

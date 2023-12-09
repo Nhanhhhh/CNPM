@@ -46,14 +46,15 @@ $('#login').click(function(event) {
 			password: passWord,
 		},
 		success: function(result) {
-			if (result == 1) {
+			if (result.status == 1) {
 				window.location.href = 'admin.html';
 				// window.open('admin.html');
+				localStorage.setItem("currentUID", result.userId);
 			}
-			else if(result == 2) {
+			else if(result.status == 2) {
 				$('.wrongLoginInfo').html('<p>Tài khoản chưa được đăng ký</p>');
 			}
-			else if(result == 3) {
+			else if(result.status == 3) {
 				$('.wrongLoginInfo').html('<p>Tài khoản hoặc mật khẩu không chính xác</p>');
 			}
 		}

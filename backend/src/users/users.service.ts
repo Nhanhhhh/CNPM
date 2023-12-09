@@ -31,16 +31,16 @@ export class UsersService {
     }
 
     // 1: access granted, 2: not registered, 3: wrong password
-    async authorizeUser(username: string, password: string): Promise<number> {
+    async authorizeUser(username: string, password: string): Promise<{status: number, userId?: number}> {
         const resultFindUserName = await this.findByUserName(username);
         if(resultFindUserName == null) {
-            return 2;
+            return {status: 2};
         }
         else {
             const correct = await compare(password, resultFindUserName.password);
             // console.log('pass: ', correct);
-            if(correct) return 1;
-            else return 3;
+            if(correct) return {status: 1, userId: resultFindUserName.id};
+            else return {status: 3};
         }
     }
 

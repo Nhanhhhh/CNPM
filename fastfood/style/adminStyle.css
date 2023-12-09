@@ -216,3 +216,11 @@ input {
 .newFoodPrice {
     margin-right: 5px;
 }
+
+.menuCategory-image > img {
+    width: 150px;
+}
+
+.menuCategory-image {
+    text-align: center;
+}

@@ -1,36 +1,7 @@
-$(document).ready(function() {
-    $('.minus').click(function () {
-        let $input = $(this).parent().find('input');
-        let count = parseInt($input.val()) - 1;
-        count = count < 0 ? 0 : count;
-        $input.val(count);
-        $input.change();
-        return false;
-    });
-
-    $('.plus').click(function () {
-        let $input = $(this).parent().find('input');
-        $input.val(parseInt($input.val()) + 1);
-        $input.change();
-        return false;
-    });
-
-    $('.countVal').focusout(function() {
-        let $input = $(this).parent().find('input');
-        let val = parseInt($input.val());
-        if (val >= 0) {
-            // console.log(val);
-            $input.val(val);
-        }
-        else{
-            $input.val(0);
-        }
-        $input.change();
-        return false;
-    });
-});
+let ordered = [];
 
 $(document).ready(function() {
+
     let catContainer = $('.food-category');
     
     $.ajax({
@@ -45,6 +16,17 @@ $(document).ready(function() {
                 catTemplate.find('.description > p').text(food.description);
                 catContainer.append(catTemplate);
             });
+
+            let stored = JSON.parse(localStorage.getItem("order"));
+            if (stored) {
+                let foodCat = $('.food-category');
+                $.each(stored, function(i, food) {
+                    let item = food.item;
+                    let quantity = food.quantity;
+                    let changeItem = foodCat.find('.item > p:contains('+item+')');
+                    changeItem.closest('.category-container').find('.number > .countVal').val(quantity);
+                })
+            }
         },
         error: function() {
             alert("Đã xảy ra lỗi. Không thể tải thực đơn.");
@@ -52,12 +34,78 @@ $(document).ready(function() {
     });
     function addCategory(itemName, price, description, srcImage) {
         let categoryContainer = $("<div>").addClass("category-container");
-
+    
         let categoryImg = $("<div>").addClass("category-img").html(
             '<img class="cat-img" src="' + srcImage + '">'
         );
-
-        
-
     }
+
+});
+
+ordered.push(...JSON.parse(localStorage.getItem("order")));
+
+function updateOrdered($refer, count) {
+    let key = $refer.parent().siblings('.item-and-price').find('.item').find('p').text();
+    let objExist = ordered.find(obj => obj.item === key);
+
+    if(count > 0) {
+        if (objExist) {
+            objExist.quantity = count;
+        }
+        else {
+            ordered.push({item: key, quantity: count});
+        }
+        // ordered[key] = count;
+        console.log(ordered);
+    }
+    else {
+        if(objExist) {
+            let index = ordered.indexOf(objExist);
+            ordered.splice(index, 1);
+        }
+        // delete ordered[key];
+        console.log(ordered);
+    }
+    localStorage.setItem("order", JSON.stringify(ordered));
+}
+
+$('.food-category').on('click', '.minus', function() {
+    let $input = $(this).parent().find('input');
+    let count = parseInt($input.val()) - 1;
+    count = count < 0 ? 0 : count;
+    $input.val(count);
+    $input.change();
+
+    updateOrdered($(this), count);
+    
+    return false;
+})
+
+$('.food-category').on('click', '.plus', function() {
+    let $input = $(this).parent().find('input');
+    let count = parseInt($input.val()) + 1
+    $input.val(count);
+    $input.change();
+
+    updateOrdered($(this), count);
+
+    return false;
+});
+
+$('.food-category').on('focusout', '.countVal', function() {
+    let $input = $(this).parent().find('input');
+    let val = parseInt($input.val());
+    if (val >= 0) {
+        // console.log(val);
+        $input.val(val);
+    }
+    else{
+        $input.val(0);
+        val = 0;
+    }
+    $input.change();
+
+    updateOrdered($(this), val);
+
+    return false;
 });

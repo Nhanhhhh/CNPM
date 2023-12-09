@@ -12,7 +12,7 @@ export class UsersController {
     }
     
     @Post("authorize") 
-    authorizeUser(@Body() { username, password }: { username: string, password: string }): Promise<number> {
+    authorizeUser(@Body() { username, password }: { username: string, password: string }): Promise<{status: number, userId?: number}> {
         return this.userService.authorizeUser(username, password);
     }
     

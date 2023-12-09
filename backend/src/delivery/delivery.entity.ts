@@ -11,6 +11,9 @@ export class Delivery {
   
   @Column()
   price: number;
+  
+  @Column()
+  address: string;
 
   @OneToOne((type) => Order, (order) => order.delivery)
   @JoinColumn()

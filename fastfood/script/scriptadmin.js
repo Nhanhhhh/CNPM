@@ -114,7 +114,7 @@ $('.addFood').click(function() {
                     <td class="menuCategory-id noedit"></td>
                     <td class="menuCategory-createAt noedit"></td>
                     <td class="menuCategory-latestChange noedit"></td>
-                    <td class="menuCategory-image noedit"></td>
+                    <td class="menuCategory-image noedit"><input type="text" class="newFoodImage" placeholder="Tên ảnh" /></td>
                     <td class="menuCategory-name noedit"><input type="text" class="newFoodName" placeholder="Tên món" /></td>
                     <td class="menuCategory-type noedit">
                         <input type="text" class="newFoodType" list="listOfTypes" placeholder="Loại món ăn" />
@@ -137,6 +137,7 @@ $('#menuBody').on('click', '.saveNewFood', function(event) {
     let type = $(this).closest('tr').find('.newFoodType').val();
     let price = $(this).closest('tr').find('.newFoodPrice').val();
     let description = $(this).closest('tr').find('.newFoodDescription').val();
+    let image = "/fastfood/images/categories/" + $(this).closest('tr').find('.newFoodImage').val();
 
     // $(this).closest('tr')
 
@@ -150,6 +151,7 @@ $('#menuBody').on('click', '.saveNewFood', function(event) {
             type: type,
             price: price,
             description: description,
+            image: image,
         },
         success: function(food) {
             let newRow = $(`<tr></tr>`);
@@ -243,6 +245,7 @@ $('#menuBody').on('click', '.editButton', function(event) {
     let price = $(this).closest('tr').find('.menuCategory-price').text().replace(/\D/g, '');
     let createAt = $(this).closest('tr').find('.menuCategory-createAt').text();
     let latestChange = $(this).closest('tr').find('.menuCategory-latestChange').text();
+    let image = $(this).closest('tr').find('.menuCategory-image').find('img').attr('src').replace("/fastfood/images/categories/", '');
     // console.log('name:',name,'type:',type,'price:',price);
 
     $(this).closest('tr').find('.noedit').hide();
@@ -253,7 +256,7 @@ $('#menuBody').on('click', '.editButton', function(event) {
             <td class="menuCategory-id edit">${id}</td>
             <td class="menuCategory-createAt edit">${createAt}</td>
             <td class="menuCategory-latestChange edit">${latestChange}</td>
-            <td class="menuCategory-image edit"></td>
+            <td class="menuCategory-image edit"><input type="text" class="newFoodImage" value="${image}" /></td>
             <td class="menuCategory-name edit"><input type="text" class="newFoodName" value="${name}" /></td>
             <td class="menuCategory-type edit">
                 <input type="text" class="newFoodType" list="listOfTypes" value="${type}" />
@@ -278,6 +281,7 @@ $('#menuBody').on('click', '.saveEditedFood', function(event) {
         type: thisRow.find('.newFoodType').val(),
         price: thisRow.find('.newFoodPrice').val(),
         description: thisRow.find('.newFoodDescription').val(),
+        image: "/fastfood/images/categories/" + thisRow.find('.newFoodImage').val(),
     };
     // console.log(food);
     if (confirm("Bạn có chắc muốn thay đổi dữ liệu món ăn này?")) {
