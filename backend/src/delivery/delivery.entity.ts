@@ -6,11 +6,14 @@ export class Delivery {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({nullable: true, charset: 'utf8', collation: 'utf8_general_ci' })
   method: string;
   
   @Column()
   price: number;
+  
+  @Column()
+  address: string;
 
   @OneToOne((type) => Order, (order) => order.delivery)
   @JoinColumn()

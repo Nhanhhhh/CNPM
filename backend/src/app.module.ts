@@ -21,7 +21,7 @@ import { DeliveryModule } from './delivery/delivery.module';
     host: 'localhost',
     port: 3306,
     username: 'root',
-    password: 'root',
+    password: '',
     database: 'cnpm',
     entities: [__dirname + '/**/*.entity{.ts,.js}'],
     synchronize: true,

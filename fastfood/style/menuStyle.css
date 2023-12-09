@@ -2,11 +2,17 @@
 
 .food-category {
     padding-top: 50px;
-    padding-left: 68px;
-    display: flex;
+    padding-left: 30px;
+    padding-right: 30px;
+    /* display: flex; */
     /* justify-content: space-evenly; */
-    flex-wrap: wrap;
-    justify-content: left;
+    /* flex-wrap: wrap; */
+    
+    display: grid;
+    justify-content: space-around;
+    justify-items: center;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 45px 16px;
 }
 
 .category-container {
@@ -18,6 +24,7 @@
     text-align: center;
     margin: 10px;
     position: relative;
+    background-color: white;
 }
 
 /* .category-container:hover {
@@ -49,11 +56,11 @@
 }
 
 .item-and-price {
-    padding-top: 5px;
+    padding-top: 10px;
     position: relative;
     /* border: 1px solid black; */
     width: 100%;
-    height: 60px;
+    height: 55px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -71,7 +78,15 @@
     position: relative;
 }
 
-.item, .price {
+.item {
+    text-align: left;
+    font-size: 17px;
+    font-family: 'Roboto', sans-serif;
+    color: black;
+    font-weight: bold;
+}
+
+.price {
     text-align: left;
     font-size: 17px;
     font-family: 'Roboto', sans-serif;

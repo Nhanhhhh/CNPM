@@ -10,11 +10,26 @@ export class UsersController {
     createUser(@Body() user: User): Promise<User> {
         return this.userService.createUser(user);
     }
-
-    @Get()
+    
+    @Post("authorize") 
+    authorizeUser(@Body() { username, password }: { username: string, password: string }): Promise<{status: number, userId?: number}> {
+        return this.userService.authorizeUser(username, password);
+    }
+    
+    @Get("findAll")
     getAll(): Promise<User[]> {
         return this.userService.findAll();
     }
+    
+    // @Get(':userName')
+    // findByUserName(@Param() params): Promise<User> {
+    //     return this.userService.findByUserName(userName);
+    // }
+
+    // @Get('signup') 
+    // findByUserName(@Body() user: any): Promise<User> {
+    //     return this.userService.findByUserName(user.userName);
+    // }
 
     @Get(':id') 
     getUserById(@Param() params) {
