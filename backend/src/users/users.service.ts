@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { User } from './user.entity';
 import { hash } from 'bcrypt';
+import { compare } from 'bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -16,6 +17,7 @@ export class UsersService {
         
         if(resultFindUserName != null) {
             throw new HttpException({ message: "This username has been used." }, HttpStatus.BAD_REQUEST);
+            console.log("trap has been triggered");
         }
 
         if(user.userName == "admin") {
@@ -40,9 +42,9 @@ export class UsersService {
         console.log(res, userId);
         return res;
     }
-    
+
     async findByUserName(username): Promise<User> {
-        return this.userRepo.findOneBy({userName: username})
+        return this.userRepo.findOneBy({userName: username});
     }
 
     async findByUserId(userId): Promise<User> {

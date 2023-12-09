@@ -16,7 +16,7 @@ export class OrdersController {
         private PaymentsService: PaymentsService
         ) {}
 
-    @Post()
+    @Post('createNewOrder')
     createOrder(@Body() body: any): Promise<Order> {
         var order_detail: Order_detail[] = body.order_details;
 

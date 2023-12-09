@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@400;500;600&display=swap');
+
+.container {
+    display: flex;
+    /* height: 100vh; */
+    /* border: 2px solid black; */
+}
+
+.leftNavigationBar {
+    width: 230px;
+    position: relative;
+    /* border: 2px dashed black; */
+    height: 100%;
+    max-height: 100%;
+    background-color: #ffca67;
+}
+
+.navButton {
+    /* border: 2px dashed black; */
+    border: none;
+    margin: 0;
+    width: 100%;
+    padding: 15px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    background-color: transparent;
+}
+
+.navButton:hover {
+    background-color: #982121;
+    color: #9acd32;
+}
+
+.content {
+    width: 100%;
+}
+
+.manageOrder {
+    /* border: 1px solid blue; */
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 100px;
+    padding-left: 10px;
+    display: block;
+    justify-content: center;
+}
+
+table {
+    width: 98%;
+    border-collapse:collapse;
+    font-family: 'Roboto', sans-serif;
+	/* font-family: 'Montserrat', sans-serif; */
+    font-size: 15px;
+    margin-bottom: 50px;
+}
+
+.manageOrder, .changeMenu p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+table td,th {
+    border:1px solid black;
+    /* border-bottom: 1px solid black; */
+}
+
+td {
+    padding: 8px 10px;
+}
+
+th {
+    padding: 14px 10px;
+    background-color: #e7e9eb;
+    font-weight: 500;
+}
+
+.menuCategory-price {
+    text-align: right;
+    /* display: flex;
+    align-items: center; */
+}
+
+.finishButton {
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: darkorange;
+    font-weight: 600;
+    font-family: 'Roboto', sans-serif;
+}
+
+.changeMenu {
+    /* border: 1px solid green; */
+    padding-left: 10px;
+    margin-top: 100px;
+    display: none;
+}
+
+.sameRow {
+    display: flex;
+    justify-content: space-between;
+    width: 98%;
+    align-items: center;
+}
+
+.addFood {
+    border: none;
+    background-color: #ffa500;
+    color: black;
+    font-weight: bolder;
+    padding: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 80ms ease-in;
+}
+
+.addFood:hover {
+    background-color: #982121;
+    color: #9acd32;
+}
+
+.addFood:active {
+    transform: scale(0.95);
+}
+
+.changeMenu-icons {
+    padding: 0;
+    text-align: center;
+}
+
+.editButton, .deleteButton {
+    background-color: transparent;
+    border: none;
+    font-size: 22px;
+    padding: 0;
+    margin: 0;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.editButton {
+    color: green;
+}
+
+.editButton:hover {
+    filter: brightness(120%);
+    transition: 80ms;
+}
+
+.editButton:active {
+    transform: scale(0.95);
+    
+}
+
+.deleteButton {
+    color: red;
+}
+
+.deleteButton:hover {
+    filter: brightness(120%);
+    transition: 80ms;
+}
+
+.deleteButton:active {
+    transform: scale(0.95);
+    
+}
+
+.saveButton {
+    background-color: transparent;
+    color: blue;
+    border: none;
+    cursor: pointer;
+}
+
+.saveButton:hover {
+    filter: brightness(120%);
+    transition: 80ms;
+}
+
+.saveButton:active {
+    transform: scale(0.95);
+    
+}
+
+.priceCell {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* margin: 0;
+    padding: 0; */
+    /* margin-bottom: -1px;
+    margin-left: -1px;
+    margin-right: -1px; */
+    /* margin-top: -1px; */
+}
+
+input {
+    width: 100%;
+    margin: 0;
+    padding: 8px 10px;
+    font-size: 15px;
+    box-sizing: border-box;
+    border: none;
+    background-color: #eee;
+    border-radius: 5px;
+}
+
+.newFoodPrice {
+    margin-right: 5px;
+}
+
+.menuCategory-image > img {
+    width: 150px;
+}
+
+.menuCategory-image {
+    text-align: center;
+}
