@@ -12,8 +12,8 @@ export class Payment {
   @Column({charset: 'utf8', collation: 'utf8_general_ci'})
   status: string;
 
-  @OneToOne((type) => Order, (order) => order.payment)
-  @JoinColumn()
-  order: Order
+  // @OneToOne((type) => Order, (order) => order.payment)
+  // @JoinColumn()
+  // order: Order
 
 }

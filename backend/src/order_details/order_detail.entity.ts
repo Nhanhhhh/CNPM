@@ -13,7 +13,7 @@ export class Order_detail {
   @Column()
   price: number;
 
-  @OneToOne((type) => Product, (product) => product.id)
+  @ManyToOne((type) => Product, (product) => product.id)
   @JoinColumn()
   product: Product
 

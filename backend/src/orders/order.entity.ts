@@ -21,17 +21,21 @@ export class Order {
   @Column({nullable: true, default: () => 'CURRENT_TIMESTAMP'})
   create_at: Date;
 
+  // 0: tiep nhan don hang, 1: dang xu ly, 2: dang van chuyen, 3: hoan thanh
+  @Column()
+  progress: number;
+
   @ManyToOne((type) => User, (user) => user.order)
   user: User
 
   @OneToMany((type) => Order_detail, (order_detail) => order_detail.order)
   order_detail: Order_detail[]
 
-  @OneToOne((type) => Payment, (payment) => payment.order)
+  @OneToOne((type) => Payment, (payment) => payment.id)
   @JoinColumn()
   payment: Payment
 
-  @OneToOne((type) => Delivery, (delivery) => delivery.order)
+  @OneToOne((type) => Delivery, (delivery) => delivery.id)
   @JoinColumn()
   delivery: Delivery
 }

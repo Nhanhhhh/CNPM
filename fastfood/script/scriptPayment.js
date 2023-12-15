@@ -94,7 +94,7 @@ $(document).ready(function() {
             })
         }
         
-        for (const product of orderData) {
+        for (let product of orderData) {
             try {
                 let response = await fetch('http://localhost:3000/products/getByName/' + product.item);
                 let food = await response.json();
@@ -110,10 +110,10 @@ $(document).ready(function() {
     
                 catContainer.appendChild(catTemplate);
 
-                total += parseInt(food.price);
+                total += parseInt(food.price) * parseInt(product.quantity);
 
                 order_details.push({
-                    productId: food.id,
+                    product: food.id,
                     quantity: product.quantity,
                     price: food.price,
                 });
@@ -139,7 +139,7 @@ $('.purchaseButton').click(function(event) {
         status: "",
     }
     // payment
-    if ($('.payByCard').prop('checked')) {
+    if ($('#card').prop('checked')) {
         if ($('.name').val() == "" || $('.cardNumber').val() == "" || $('.Expiration').val() == "" || $('.securityCode').val() == "") {
             alert("Thông tin thẻ chưa đầy đủ.");
             return false;
@@ -168,7 +168,7 @@ $('.purchaseButton').click(function(event) {
     }
     let note = $('.noteInput').val();
     let discount = 0;
-    const userId = localStorage.getItem("currentUID");
+    let userId = localStorage.getItem("currentUID");
     if (!userId) {
         alert("Hãy đăng nhập để thực hiện thanh toán");
         return false;

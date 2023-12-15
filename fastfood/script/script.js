@@ -5,7 +5,7 @@ function openTab(tab) {
 }
 
 // manual timing carousel
-{
+// {
 // let currentSlide = 0;
 // const slideInterval = 3000;  // Change slide every 3 seconds (adjust as needed)
 // let slideTimer;
@@ -57,12 +57,60 @@ function openTab(tab) {
 // // Show the first slide initially
 // showSlide(currentSlide);
 // startCarousel();
-}
+// }
 
 $(function () {
-    var includes = $('[data-include]')
-    $.each(includes, function () {
-      let file = $(this).data('include') + '.html'
-      $(this).load(file)
-    })
-  })
+  let includes = $('[data-include]');
+  
+  function loadContent(element) {
+      let file = $(element).data('include') + '.html';
+      $(element).load(file, function () {
+          if (!localStorage.getItem("currentUID")) {
+              $(element).find('.dropdown-content').hide();
+          }
+      });
+  }
+
+  $.each(includes, function () {
+      loadContent(this);
+  });
+});
+
+let currentUser = null;
+
+$(document).ready(function() {
+  $.ajax({
+    type: 'GET',
+    url: 'http://localhost:3000/users/' + localStorage.getItem("currentUID"),
+    success: function(user) {
+      let logInButton = $('.tabBar').children().last().find('a');
+      logInButton.text(user.userName);
+      currentUser = user;
+    },
+    error: function(error) {
+      console.log(error);
+    }
+  });
+
+  
+});
+
+$(document).on('click', '.logOut', function (e) { 
+  e.preventDefault();
+  
+  localStorage.removeItem("currentUID");
+  location.reload();
+});
+
+$(document).on('click', '.dropdown > .tabButton', function () {
+  if (currentUser) {
+    if (currentUser.userName == 'admin') {
+      window.location.href = 'admin.html';
+      $('.dropdown > .tabButton > a').attr('href', 'admin.html');
+    }
+    else {
+      window.location.href = 'home.html';
+      $('.dropdown > .tabButton > a').attr('href', 'home.html');
+    }
+  }
+});
