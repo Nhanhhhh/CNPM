@@ -1,5 +1,7 @@
 // let menuVar = "";
 let list = "";
+let listOfOrders;
+let orders;
 let timeOption = {
     weekday: 'short', 
     year: 'numeric', 
@@ -10,8 +12,30 @@ let timeOption = {
     second: '2-digit', 
     hour12: false,
 };
+const orderProgress = ['Tiếp nhận đơn hàng', 'Xử lý', 'Vận chuyển', 'Hoàn thành'];
 
 $(document).ready(function () {
+    setInterval(() => {
+        let currentUID = localStorage.getItem("currentUID");
+        if (currentUID) {
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:3000/users/' + currentUID,
+                success: function(user) {
+                    if (user.userName != 'admin') {
+                        window.location.href = 'login.html';
+                    }
+                },
+                error: function() {
+                    window.location.href = 'login.html';
+                }
+            });
+        }
+        else {
+            window.location.href = 'login.html';
+        }
+    }, 10000);
+    
     $('.manageOrderButton').click(function() {
         $('.manageOrder').show();
         $('.changeMenu').hide();
@@ -62,42 +86,210 @@ $(document).ready(function () {
             // console.log(list);
         },
     });
+
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:3000/orders',
+        success: function(ords) {
+            orders = ords;
+
+            $.each(orders, function(i, order) {
+                let orderTemplate = $('#order-template').contents().clone();
+                // order id
+                orderTemplate.find('.order-ID').text(order.id);
+                // note
+                orderTemplate.find('.order-note').text(order.note);
+                // overall
+                orderTemplate.find('.order-overall').text(order.total + '₫');
+                // customer id
+                orderTemplate.find('.order-customerID').text(order.user.id);
+                // create at
+                orderTemplate.find('.order-createAt').text((new Date(order.create_at)).toLocaleString('vi-VN', timeOption));
+                // foods
+                orderTemplate.find('.order-foods').text(toListOfFoods(order.order_detail));
+                // address
+                orderTemplate.find('.order-address').text(order.delivery.address);
+                // paymentStatus
+                orderTemplate.find('.order-paymentStatus').text(order.payment.status);
+                // paymentMethod
+                orderTemplate.find('.order-paymentMethod').text(order.payment.name);
+                // deleteButton
+                orderTemplate.find('.order-delButton').html(`<button class="deleteButton order-confirmDel">&#10006;</button>`);
+                // editButton
+                orderTemplate.find('.order-editButton').html(`<button class="editButton">&#9998;</button>`);
+                // progress
+                orderTemplate.find('.order-progress').text(orderProgress[parseInt(order.progress)]);
+
+                $('.ordTBBody').append(orderTemplate);
+            });
+        },
+        error: function() {
+            alert("Đã xảy ra lỗi. Không thể tải đơn hàng.");
+        }
+    });
 });
 
+function toListOfFoods(arr) {
+    let res = "";
+    arr.forEach(food => {
+        res += ((food.product) ? food.product.name : "") + " (x" + food.quantity + "), ";
+    });
+    res = res.replace(/, $/, '');
+    return res;
+}
 
+$('.ordTBBody').on('click', '.order-confirmDel', function () {
+    let orderId = $(this).closest('tr').find('.order-ID').text();
+    let rowTodel = $(this).closest('tr');
 
-// let myArray = [
-//     { 'id':'1', 'image':'', 'name':'chicken dinner', 'type':'chicken', 'price':'100000' },
-//     { 'id':'2', 'image':'', 'name':'pizzagoras', 'type':'pizza', 'price':'150000' },
-//     { 'id':'3', 'image':'', 'name':'hot cerberus', 'type':'bread', 'price':'50000' },
-//     { 'id':'4', 'image':'', 'name':'tamexico', 'type':'tacos', 'price':'100000' },
-//     { 'id':'5', 'image':'', 'name':'fire fried', 'type':'fried potatoes', 'price':'50000' },
-// ];
+    if (confirm("Bạn có chắc muốn xóa đơn hàng này?")) {
+        $.ajax({
+            type: 'DELETE',
+            url: 'http://localhost:3000/orders/' + orderId,
+            success: function() {
+                rowTodel.fadeOut(300, function() {
+                    $(this).remove();
+                });
+            },
+            error: function(error) {
+                alert("Đã xảy ra lỗi. Không thể xóa đơn hàng này.");
+                console.log(error);
+            }
+        });
+    }
+});
 
-// function printMenu(arr) {
-//     let menuBodyPlaceHolder = document.querySelector('#menuBody');
-//     let content = "";
+$('.ordTBBody').on('click', '.editButton', function () {
+    let thisRow = $(this).closest('tr');
+    let editRow = thisRow.clone();
+    thisRow.after(editRow);
+    thisRow.hide();
+
+    // address
+    let rowAddress = thisRow.find('.order-address');
+    let address = rowAddress.text();
+
+    // paymentStatus
+    let rowStatus = thisRow.find('.order-paymentStatus');
+    let paymentStatusList = "<option value=\"Chưa thanh toán\"><option value=\"Đã thanh toán\">";
     
-//     for (let i = 0; i < arr.length; i++) {
-//         content += `
-//             <tr>
-//                 <td class="menuCategory-id noedit">${arr[i].id}</td>
-//                 <td class="menuCategory-image noedit"><img src="${arr[i].image}"></td>
-//                 <td class="menuCategory-name noedit">${arr[i].name}</td>
-//                 <td class="menuCategory-type noedit">${arr[i].type}</td>
-//                 <td class="menuCategory-price noedit">${arr[i].price}₫</td>
-//                 <td class="changeMenu-icons noedit"><button class="editButton">&#9998;</button></td>
-//                 <td class="changeMenu-icons noedit"><button class="deleteButton">&#10006;</button></td>
-//             </tr>
-//         `;
-//     }
+    // progress
+    let rowProgress = thisRow.find('.order-progress');
+    let progressList = "<option value=\"Tiếp nhận đơn hàng\"><option value=\"Xử lý\"><option value=\"Vận chuyển\"><option value=\"Hoàn thành\">";
 
-//     menuBodyPlaceHolder.innerHTML = content;
-// };
+    // edit
+    editRow.find('.order-address').contents().replaceWith(`<input type="text" class="editAddress" value="${address}" />`);
+    editRow.find('.order-paymentStatus').contents().replaceWith(`
+    <input type="text" class="editPaymentStatus" list="listOfPaymentStatus" value="${rowStatus.text()}" />
+    <datalist id="listOfPaymentStatus">${paymentStatusList}</datalist>
+    `)
+    editRow.find('.order-progress').contents().replaceWith(`
+    <input type="text" class="editProgress" list="listOfProgress" value="${rowProgress.text()}" />
+    <datalist id="listOfProgress">${progressList}</datalist>
+    `)
+    editRow.find('.order-editButton').contents().replaceWith(`<button type="submit" class="saveButton order-saveChange">&#128190;</button>`);
+    editRow.find('.order-delButton').contents().replaceWith(`<button class="deleteButton cancelChange" style="color: yellowgreen;">&#10006;</button>`);
+});
 
-// printMenu(myArray);
+$('.ordTBBody').on('click', '.cancelChange', function(event) {
+    event.preventDefault();
+    $(this).closest('tr').prev('tr').show();
+    $(this).closest('tr').remove();
+});
 
+$('.ordTBBody').on('click', '.order-saveChange', function () {
+    if (!confirm("Bạn có chắc muốn lưu thay đổi?")) {
+        return false;
+    }
+    let thisRow = $(this).closest('tr');
+    let address = thisRow.find('.editAddress').val();
+    let paymentStatus = thisRow.find('.editPaymentStatus').val();
+    if (paymentStatus != "Chưa thanh toán" && paymentStatus != "Đã thanh toán") {
+        alert("Thông tin vê thanh toán không hợp lệ. Không thể cập nhật đơn hàng");
+        return false;
+    }
+    let progress = thisRow.find('.editProgress').val();
+    let enumProgress = orderProgress.indexOf(progress);
+    if (enumProgress == -1) {
+        alert("Thông tin về tiến trình đơn hàng không hợp lệ. Không thể cập nhật đơn hàng.");
+        return false;
+    }
 
+    let orderId = thisRow.find('.order-ID').text();
+    let thisOrder = orders.find((order) => order.id == orderId);
+    if (!thisOrder) {
+        alert("Đã xảy ra lỗi. Không thể cập nhật đơn hàng.");
+        return false;
+    }
+
+    let newPayment = {
+        id: thisOrder.payment.id,
+        // name: thisOrder.payment.name,
+        status: paymentStatus,
+    }
+    let newDelivery = {
+        id: thisOrder.delivery.id,
+        // method: thisOrder.delivery.method,
+        // price:thisOrder.delivery.price,
+        address: address,
+    }
+    let newOrder = {
+        id: orderId,
+        progress: enumProgress,
+    }
+
+    $.ajax({
+        type: 'PUT',
+        url: 'http://localhost:3000/payments',
+        data: newPayment,
+        error: function() {
+            alert("Đã xảy ra lỗi. Không thể cập nhật thông tin thanh toán.");
+        }
+    });
+
+    $.ajax({
+        type: 'PUT',
+        url: 'http://localhost:3000/delivery',
+        data: newDelivery,
+        error: function() {
+            alert("Đã xảy ra lỗi. Không thể cập nhật thông tin vận chuyển.");
+        }
+    });
+
+    $.ajax({
+        type: 'PUT',
+        url: 'http://localhost:3000/orders',
+        data: newOrder,
+        error: function() {
+            alert("Đã xảy ra lỗi. Không thể cập nhật thông tin đơn hàng.");
+        }
+    });
+    
+    let dataRow = thisRow.prev();
+    dataRow.find('.order-address').text(address);
+    dataRow.find('.order-paymentStatus').text(paymentStatus);
+    dataRow.find('.order-progress').text(orderProgress[enumProgress]);
+    dataRow.show();
+    thisRow.remove();
+});
+
+async function getData(url, type) {
+    try {
+        const response = await fetch(url, {
+          method: type,
+        });
+    
+        if (!response.ok) {
+          throw new Error('Đã xảy ra lỗi. Không thể tải đơn hàng.');
+        }
+    
+        const data = await response.json();
+        
+        return data;
+    } catch (error) {
+        alert(error);
+    }
+}
 
 let addingNewFood = false;
 
@@ -189,10 +381,10 @@ $('#menuBody').on('click', '.confirmDel', function(event) {
     event.preventDefault();
 
     let id = $(this).closest('tr').find('.menuCategory-id').text();
+    let rowTodel = $(this).closest('tr');
 
     // if(addingNewFood && $(this).closest('tr').is($('#menuBody > tr').eq(0)) ) {
     if (confirm("Bạn có chắc muốn xóa món ăn này khỏi thực đơn?")) {
-        let rowTodel = $(this).closest('tr');
         $.ajax({
             type: 'DELETE',
             url: 'http://localhost:3000/products/' + id,
@@ -319,3 +511,4 @@ $('#menuBody').on('click', '.saveEditedFood', function(event) {
 
     addingNewFood = false;
 });
+

@@ -11,13 +11,7 @@
     
 </head>
 <body>
-    <div class="tabBar">
-        <button class="tabButton" onclick="openTab('home')"><a href="home.html">Trang chủ</a></button>
-        <button class="tabButton" onclick="openTab('menu')"><a href="menu.html">Thực đơn</a></button>
-        <button class="tabButton" onclick="openTab('payment')"><a href="payment.html">Thanh toán</a></button>
-        <button class="tabButton" onclick="openTab('about')"><a href="about.html">About</a></button>
-        <button class="tabButton" onclick="openTab('login')"><a href="login.html">Admin</a></button>
-    </div>
+  <div data-include="tabbar"></div>
 
     <div class="container">
         <div class="leftNavigationBar">
@@ -31,34 +25,39 @@
             <p>ĐƠN HÀNG ĐANG XỬ LÝ</p>
             <table>
                 <thead>
-                  <th style="width: 15%;">Khách hàng</th>
+                  <th style="width: 3%;">Mã đơn hàng</th>
+                  <th style="width: 3%;">Mã khách hàng</th>
                   <th style="width: 10%;">Thời gian tiếp nhận đơn hàng</th>
-                  <th style="width: 10%;">Thời gian hoàn thành đơn hàng</th>
                   <th style="width: 20%;">Món khách đặt</th>
-                  <th style="width: 20%;">Địa chỉ nhận hàng</th>
-                  <th style="width: 15%;">Tổng giá trị đơn hàng</th>
-                  <th style="width: 10%;">Đánh dấu là đã hoàn thành</th>
+                  <th style="width: 12%;">Địa chỉ nhận hàng</th>
+                  <th style="width: 10%;">Tổng giá trị đơn hàng</th>
+                  <th style="width: 8%;">Trạng thái thanh toán</th>
+                  <th style="width: 8%;">Hình thức thanh toán</th>
+                  <th style="width: 10%;">Ghi chú</th>
+                  <th style="width: 3%;">Sửa</th>
+                  <th style="width: 3%;">Xóa</th>
+                  <th style="width: 10%;">Đơn hàng đang trong giai đoạn</th>
                 </thead>
-                <tr>
-                  <td>qwe</td>
-                  <td>asd</td>
-                  <td>zxc</td>
-                  <td>10</td>
-                  <td>10</td>
-                  <td>10</td>
-                  <td><button class="finishButton">HOÀN THÀNH</button></td>
-                </tr>
-                <tr>
-                  <td>16</td>
-                  <td>14</td>
-                  <td>10</td>
-                </tr>
-                <tr>
-                  <td>as</td>
-                </tr>
-                <tr>
-                  <td>as</td>
-                </tr>
+                <tbody class="ordTBBody">
+                  <template id="order-template">
+                    <tr>
+                      <td class="order-ID noedit"></td>
+                      <td class="order-customerID noedit"></td>
+                      <td class="order-createAt noedit"></td>
+                      <td class="order-foods noedit"></td>
+                      <td class="order-address noedit"></td>
+                      <td class="order-overall noedit"></td>
+                      <td class="order-paymentStatus noedit"></td>
+                      <td class="order-paymentMethod noedit"></td>
+                      <td class="order-note noedit"></td>
+                      <td class="order-icons order-editButton noedit"></td>
+                      <td class="order-icons order-delButton noedit"></td>
+                      <td class="order-progress noedit"></td>
+                      <!-- <button class="order-finishButton noedit">HOÀN THÀNH</button> -->
+                    </tr>
+                  </template>
+                </tbody>
+                
             </table>
           </div>
 

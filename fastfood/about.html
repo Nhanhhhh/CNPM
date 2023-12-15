@@ -2,23 +2,68 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>About Us</title>
+    <title>Order Progress</title>
     <link rel="stylesheet" type="text/css" href="style/style.css">
+    <link rel="stylesheet" type="text/css" href="style/aboutStyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" type="text/css" href="style/jquery-editable-select.min.css">
 </head>
 <body>
-    <div class="tabBar">
-        <button class="tabButton" onclick="openTab('home')"><a href="home.html">Trang chủ</a></button>
-        <button class="tabButton" onclick="openTab('menu')"><a href="menu.html">Thực đơn</a></button>
-        <button class="tabButton" onclick="openTab('payment')"><a href="payment.html">Thanh toán</a></button>
-        <button class="tabButton" onclick="openTab('about')"><a href="about.html">About</a></button>
-        <button class="tabButton" onclick="openTab('login')"><a href="login.html">Đăng nhập</a></button>
-    </div>
+    <div data-include="tabbar"></div>
 
-    <h1>About Us</h1>
-    <p>content in about us</p>
+        <div class="bg">
+            <h1>KIỂM TRA THÔNG TIN ĐƠN HÀNG</h1>
+            <div class="search-container">
+                <!-- <form action="" class="orderIdForm"> -->
+                    <div class="search-input">
+                        <input class="searchBox" type="text" placeholder="Nhập mã đơn hàng của bạn tại đây">
+                        <button type="button" class="submitOrderId"><i class="fa fa-search"></i></button>
+                    </div>
+                <!-- </form> -->
+            </div>
+        </div>
+
+        <div class="response">
+            <p class="nonexist" style="display: none;">Đơn hàng không tồn tại. Vui lòng kiểm tra lại.</p>
+            <table class="res-tb" style="display: none;">
+                <thead>
+                    <th style="width: 4%;">Mã đơn hàng</th>
+                    <th style="width: 5%;">Tên khách hàng</th>
+                    <th style="width: 10%;">Thời gian tiếp nhận đơn hàng</th>
+                    <th style="width: 20%;">Món đã đặt</th>
+                    <th style="width: 15%;">Địa chỉ nhận hàng</th>
+                    <th style="width: 8%;">Tổng giá trị đơn hàng</th>
+                    <th style="width: 8%;">Trạng thái thanh toán</th>
+                    <th style="width: 10%;">Hình thức thanh toán</th>
+                    <th style="width: 10%;">Ghi chú</th>
+                    <th style="width: 10%;">Đơn hàng đang trong giai đoạn</th>
+                </thead>
+                <tbody class="resTBBody">
+                    <tr class="resRow">
+                    <td class="res-ID"></td>
+                    <td class="res-customerName"></td>
+                    <td class="res-createAt"></td>
+                    <td class="res-foods"></td>
+                    <td class="res-address"></td>
+                    <td class="res-overall"></td>
+                    <td class="res-paymentStatus"></td>
+                    <td class="res-paymentMethod"></td>
+                    <td class="res-note"></td>
+                    <td class="res-progress"></td>
+                    </tr>
+                </tbody>
+                
+            </table>
+        </div>
 
     <div data-include="footer"></div>
 
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="script/jquery-editable-select.min.js"></script>
     <script src="script/script.js"></script>
+    <script type="text/javascript" src="script/scriptAbout.js"></script>
+
 </body>
 </html>

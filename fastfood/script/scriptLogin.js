@@ -47,7 +47,12 @@ $('#login').click(function(event) {
 		},
 		success: function(result) {
 			if (result.status == 1) {
-				window.location.href = 'admin.html';
+				if (userName == 'admin') {
+					window.location.href = 'admin.html';
+				}
+				else {
+					window.location.href = 'home.html';
+				}
 				// window.open('admin.html');
 				localStorage.setItem("currentUID", result.userId);
 			}
@@ -130,7 +135,7 @@ $('#signup').click(function(event) {
 		url: 'http://localhost:3000/users/',
 		data: newUser,
 		success: function() {
-			window.location.href = 'admin.html';
+			window.location.href = 'home.html';
 		},
 		error: function() {
 			$('.usernameExisted').html('<p>Tài khoản đã tồn tại</p>');

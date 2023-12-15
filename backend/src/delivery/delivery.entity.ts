@@ -15,7 +15,7 @@ export class Delivery {
   @Column()
   address: string;
 
-  @OneToOne((type) => Order, (order) => order.delivery)
-  @JoinColumn()
-  order: Order
+  // @OneToOne((type) => Order, (order) => order.delivery)
+  // @JoinColumn()
+  // order: Order
 }

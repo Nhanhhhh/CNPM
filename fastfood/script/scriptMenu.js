@@ -42,6 +42,9 @@ $(document).ready(function() {
 
 });
 
+if (!localStorage.getItem("order")) {
+    localStorage.setItem("order", JSON.stringify(ordered));
+}
 ordered.push(...JSON.parse(localStorage.getItem("order")));
 
 function updateOrdered($refer, count) {
@@ -56,7 +59,7 @@ function updateOrdered($refer, count) {
             ordered.push({item: key, quantity: count});
         }
         // ordered[key] = count;
-        console.log(ordered);
+        // console.log(ordered);
     }
     else {
         if(objExist) {

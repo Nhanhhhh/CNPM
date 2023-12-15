@@ -17,53 +17,64 @@ export class OrdersController {
         ) {}
 
     @Post('createNewOrder')
-    createOrder(@Body() body: any): Promise<Order> {
-        var order_detail: Order_detail[] = body.order_details;
-
-        var total = 0;
-        order_detail.forEach((i) => {
-            total += (i.price * i.quantity);
-            this.ordersDetailService.createOrderDetail(i);
-        })
-        var finalMoney = total * body.discount / 100;
-        var deliveryPrice = 25000;
-        if(finalMoney >= 100000) deliveryPrice = 0;
-        //finalMoney += deliveryPrice;
+    async createOrder(@Body() body: any): Promise<Order> {
+       
 
         var delivery: any = {
             method: "Giao hàng nhanh",
             price: deliveryPrice,
+            address: body.address,
         }
 
-        var payment: any = {
-            name: "Thanh toán khi nhận hàng",
-            status: "Chưa thanh toán",
-        }
-
+        // console.log(newOrder);
+        let createPayment = await this.PaymentsService.createPayment(body.payment);
+        let createDelivery = await this.DeliveryService.createDelivery(delivery);
+        
         var newOrder: any = {
             total: finalMoney,
             note: body.note,
             discount: body.discount,
             user: body.user,
             order_detail: order_detail,
-            delivery: delivery,
-            payment: payment,
+            delivery: createDelivery,
+            payment: createPayment,
+            progress: 0,
         }   
-
+        let thisOrder = await this.OrdersService.createOrder(newOrder);
+        var order_detail: Order_detail[] = body.order_details;
+        
+        var total = 0;
+        order_detail.forEach((i) => {
+            i.order = thisOrder;
+            total += (i.price * i.quantity);
+            this.ordersDetailService.createOrderDetail(i);
+        })
+        var finalMoney = total * (1 - body.discount);
+        var deliveryPrice = 25000;
+        if(finalMoney >= 100000) deliveryPrice = 0;
+        finalMoney += deliveryPrice;
+        
+        thisOrder.total = finalMoney;
+        await this.OrdersService.updateOrder(thisOrder);        
+        newOrder.total = finalMoney;
+        
         console.log(newOrder);
-        this.PaymentsService.createPayment(payment);
-        this.DeliveryService.createDelivery(delivery);
-        return this.OrdersService.createOrder(newOrder);
+        return newOrder;
     }
-
+    
     @Get()
     getAll(): Promise<Order[]> {
         return this.OrdersService.findAll();
     }
 
-    @Get(':id') 
+    @Get('getById/:id')
     getOrderById(@Param() params) {
         return this.OrdersService.getOrderById(params.id);
+    }
+
+    @Get('ref/:id') 
+    getRef(@Param() params): Promise<any> {
+        return this.OrdersService.getRef(params.id);
     }
 
     @Put()

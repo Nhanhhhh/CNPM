@@ -9,8 +9,8 @@ export class Product {
   @Column()
   image: string;
 
-  // @Column('float')
-  // price: number;
+  @Column()
+  price: number;
 
   @Column()
   type: string;
@@ -29,7 +29,7 @@ export class Product {
   // @UpdateDateColumn()
   latestChange: Date;
 
-  @OneToOne((type) => Order_detail, (order_detail) => order_detail.product)
-  @JoinColumn()
-  order_detail: Order_detail
+  // @OneToOne((type) => Order_detail, (order_detail) => order_detail.product)
+  // @JoinColumn()
+  // order_detail: Order_detail
 }

@@ -23,24 +23,25 @@ export class UsersService {
         if(user.userName == "admin") {
             user.role = 0;
         }
-        if(user.role == null) {
-            user.role = 1;
-        }
 
         const hashPassword = await hash(user.password, 10);
         user.password = hashPassword;
+        user.role = 1;
         return await this.userRepo.save(user);
     }
 
-    async findOrdersInUser(userId: number): Promise<User> {
-        const res = await this.userRepo.createQueryBuilder("user")
-            .leftJoin("user.order", "order")
-            .select(["user", "order"])
-            .where("user.id=:id", {id: userId})
-            .getOne();
-
-        console.log(res, userId);
-        return res;
+    // 1: access granted, 2: not registered, 3: wrong password
+    async authorizeUser(username: string, password: string): Promise<{status: number, userId?: number}> {
+        const resultFindUserName = await this.findByUserName(username);
+        if(resultFindUserName == null) {
+            return {status: 2};
+        }
+        else {
+            const correct = await compare(password, resultFindUserName.password);
+            // console.log('pass: ', correct);
+            if(correct) return {status: 1, userId: resultFindUserName.id};
+            else return {status: 3};
+        }
     }
 
     async findByUserName(username): Promise<User> {

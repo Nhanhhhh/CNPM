@@ -1,7 +1,7 @@
-# CNPM
-Quy trình làm việc:  
-Đọc kỹ task được giao và code đúng theo yêu cầu.  
-Sau khi hoàn thành tạo pull-request và mô tả đã làm những gì.  
-Sau khi review thì merge vào main.  
-Lưu ý:   
-Tạo branch từ main để code, không được commit trực tiếp vào main (thằng nào commit vào main sẽ biết hoa cải màu gì)
+Mở folder backend, sau đó chạy lệnh `npm run start`trong terminal.
+
+**Lưu ý:**
+
+- Cần mở cơ sở dữ liệu trước, mật khẩu của người dùng root ở cơ sở dữ liệu phải là rỗng (hoặc không có mật khẩu).
+
+- Nếu lệnh trên không chạy được thì có thể thử quay về đường dẫn chính rồi chạy lệnh `npm install --save @nestjs/typeorm typeorm mysql2`.
